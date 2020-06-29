@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       
+       
+        h1 {
+            text-align: center;
+            color: rgb(70, 158, 187);
+        }
+
+        .container {
+           border-top: 3px solid black;
+           border-bottom: 3px solid black;
+            margin-left: 36%;
+            margin-right: 36%;
+            padding: 40px;
+            background-color: rgba(128, 128, 128, 0.445);
+        }
+
+        label {
+            text-align: right;
+            width: 90px;
+            display: inline-block;
+        }
+
+        input {
+            background-color: rgba(119, 153, 143, 0.582);
+            border-radius: 5px;
+            height: 20px;
+        }
+        #agree{
+            height: 10px;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        #submit {
+            width: 80px;
+        }
+
+        #reset_form {
+            width: 50px;
+
+        }
+    </style>
+</head>
+
+<body dir="rtl">
+    <h1>טופס - דוגמא</h1>
+    <div class="container">
+        <form id="form" name="demo_form" action="#" onsubmit="sub(event);return false">
+            <label for="fname">שם פרטי:</label>
+            <input type="text" id="fname" name="fname"><br /><br />
+            <label for="lname">שם משפחה:</label>
+            <input type="text" id="lname" name="lname"><br /><br />
+            <label for="email">אימייל</label>
+            <input type="email" id="email" name="email"><br /><br />
+            <label for="password">סיסמא:</label>
+            <input type="password" id="password" name="password"><br /><br />
+            <label for="birthday">תאריך לידה:</label>
+            <input type="date" id="birthday" name="birthday"><br /><br />
+            <label for="favorit_color">בחר צבע אהוב:</label>
+            <input type="color" id="favorit_color" name="favorit_color" value="#ff0000"><br /><br />
+            <input type="checkbox" id="agree" name="agree" required>
+            <label for="agree">אשר את התנאים</label><br /><br />
+            <div class="center">
+                <input type="submit" id="submit" value="שלח טופס"><br /><br />
+                <input type="reset" id="reset_form" value="מחק">
+            </div>
+
+
+        </form>
+    </div>
+
+    <script>
+        function sub(e) {
+            const formData = new FormData(e.target);
+            console.log(formData.keys());
+            console.log("submit", e);
+
+            for (var value of formData.entries()){
+                // if(value[0]=="fname"){
+                //     alert('שלום ' + value[1]);
+                // }
+                console.log(value);
+            }
+        
+        // var request = new XMLHttpRequest();
+        // request.open("POST","https://webhook.site/9ddd17ad-bfb8-4ba9-8f06-10d59c7507d3");
+        // request.send(formData);
+         
+        var object = {};
+            formData.forEach((value,key) => {
+              object[key] = value
+            });
+
+        const options = {
+            method:'POST',
+            body: JSON.stringify(object),
+            headers:{'content-type': 'application/json'}
+        }
+        fetch('https://webhook.site/9ddd17ad-bfb8-4ba9-8f06-10d59c7507d3',options)
+        .then((result)=>{
+            console.log(result.json());
+            
+        })
+        
+         }
+
+    </script>
+
+</body>
+
+</html>
